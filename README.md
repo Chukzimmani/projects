@@ -1,4 +1,3 @@
-# projects
 # Harry Potter Character Network Analysis
 
 This project aims to create a network of Harry Potter characters and derive insights from the information. The analysis includes determining the most important characters, tracking their importance over time, and identifying the strongest communities within the network.
