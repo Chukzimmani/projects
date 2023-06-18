@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1000px;
+                 height: 700px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"betweenness_cetrality": 0.7996822069149112, "closeness_cetrality": 0.9473684210526315, "degree_cetrality": 0.9444444444444444, "font": {"color": "white"}, "group": 0, "id": "Harry", "label": "Harry", "shape": "dot", "size": 51}, {"betweenness_cetrality": 0.025618115869688197, "closeness_cetrality": 0.5684210526315789, "degree_cetrality": 0.24074074074074073, "font": {"color": "white"}, "group": 1, "id": "Muggle", "label": "Muggle", "shape": "dot", "size": 13}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "First", "label": "First", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.00034940600978336826, "closeness_cetrality": 0.5, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 2, "id": "Bella", "label": "Bella", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.0010482180293501049, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.09259259259259259, "font": {"color": "white"}, "group": 2, "id": "Narcissa", "label": "Narcissa", "shape": "dot", "size": 5}, {"betweenness_cetrality": 0.001397624039133473, "closeness_cetrality": 0.5142857142857142, "degree_cetrality": 0.1111111111111111, "font": {"color": "white"}, "group": 2, "id": "Severus", "label": "Severus", "shape": "dot", "size": 6}, {"betweenness_cetrality": 0.0025456723569931114, "closeness_cetrality": 0.5192307692307693, "degree_cetrality": 0.1111111111111111, "font": {"color": "white"}, "group": 2, "id": "Bellatrix", "label": "Bellatrix", "shape": "dot", "size": 6}, {"betweenness_cetrality": 0.009107849988353133, "closeness_cetrality": 0.5346534653465347, "degree_cetrality": 0.18518518518518517, "font": {"color": "white"}, "group": 3, "id": "Hogwarts", "label": "Hogwarts", "shape": "dot", "size": 10}, {"betweenness_cetrality": 0.002678779408339156, "closeness_cetrality": 0.5192307692307693, "degree_cetrality": 0.12962962962962962, "font": {"color": "white"}, "group": 2, "id": "Lucius", "label": "Lucius", "shape": "dot", "size": 7}, {"betweenness_cetrality": 0.006069681541379654, "closeness_cetrality": 0.5346534653465347, "degree_cetrality": 0.14814814814814814, "font": {"color": "white"}, "group": 4, "id": "Ministry", "label": "Ministry", "shape": "dot", "size": 8}, {"betweenness_cetrality": 0.00747728860936408, "closeness_cetrality": 0.5294117647058824, "degree_cetrality": 0.14814814814814814, "font": {"color": "white"}, "group": 1, "id": "Albus", "label": "Albus", "shape": "dot", "size": 8}, {"betweenness_cetrality": 0.01547535855711956, "closeness_cetrality": 0.5294117647058824, "degree_cetrality": 0.12962962962962962, "font": {"color": "white"}, "group": 5, "id": "Neville", "label": "Neville", "shape": "dot", "size": 7}, {"betweenness_cetrality": 0.01211856510598649, "closeness_cetrality": 0.5142857142857142, "degree_cetrality": 0.07407407407407407, "font": {"color": "white"}, "group": 5, "id": "Hedwig", "label": "Hedwig", "shape": "dot", "size": 4}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 0, "id": "Petunia", "label": "Petunia", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.00034940600978336826, "closeness_cetrality": 0.5, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 0, "id": "Dudley", "label": "Dudley", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.0014217496921899435, "closeness_cetrality": 0.5142857142857142, "degree_cetrality": 0.07407407407407407, "font": {"color": "white"}, "group": 0, "id": "Kreacher", "label": "Kreacher", "shape": "dot", "size": 4}, {"betweenness_cetrality": 0.06812002928355128, "closeness_cetrality": 0.5869565217391305, "degree_cetrality": 0.31481481481481477, "font": {"color": "white"}, "group": 5, "id": "Hermione", "label": "Hermione", "shape": "dot", "size": 17}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 3, "id": "Dark", "label": "Dark", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.037037037037037035, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.07407407407407407, "font": {"color": "white"}, "group": 1, "id": "Horace", "label": "Horace", "shape": "dot", "size": 4}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Second", "label": "Second", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0044149945093341315, "closeness_cetrality": 0.5346534653465347, "degree_cetrality": 0.14814814814814814, "font": {"color": "white"}, "group": 5, "id": "Gryffindor", "label": "Gryffindor", "shape": "dot", "size": 8}, {"betweenness_cetrality": 0.003646301287810722, "closeness_cetrality": 0.5346534653465347, "degree_cetrality": 0.14814814814814814, "font": {"color": "white"}, "group": 5, "id": "Quidditch", "label": "Quidditch", "shape": "dot", "size": 8}, {"betweenness_cetrality": 0.0001397624039133473, "closeness_cetrality": 0.5, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 4, "id": "Ronald", "label": "Ronald", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.00771022594921966, "closeness_cetrality": 0.5294117647058824, "degree_cetrality": 0.16666666666666666, "font": {"color": "white"}, "group": 2, "id": "Arthur", "label": "Arthur", "shape": "dot", "size": 9}, {"betweenness_cetrality": 0.00037269974376892616, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.09259259259259259, "font": {"color": "white"}, "group": 4, "id": "Molly", "label": "Molly", "shape": "dot", "size": 5}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Nymphadora", "label": "Nymphadora", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0094572559981365, "closeness_cetrality": 0.5454545454545454, "degree_cetrality": 0.18518518518518517, "font": {"color": "white"}, "group": 4, "id": "George", "label": "George", "shape": "dot", "size": 10}, {"betweenness_cetrality": 0.00037269974376892616, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.09259259259259259, "font": {"color": "white"}, "group": 4, "id": "Percy", "label": "Percy", "shape": "dot", "size": 5}, {"betweenness_cetrality": 0.001579814315663372, "closeness_cetrality": 0.5242718446601942, "degree_cetrality": 0.1111111111111111, "font": {"color": "white"}, "group": 3, "id": "Three", "label": "Three", "shape": "dot", "size": 6}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 4, "id": "Charlie", "label": "Charlie", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.002212904728627999, "closeness_cetrality": 0.5142857142857142, "degree_cetrality": 0.1111111111111111, "font": {"color": "white"}, "group": 1, "id": "Tom", "label": "Tom", "shape": "dot", "size": 6}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Mother", "label": "Mother", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.5046728971962616, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 5, "id": "Cormac", "label": "Cormac", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 2, "id": "James", "label": "James", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Vincent", "label": "Vincent", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 5, "id": "Ravenclaw", "label": "Ravenclaw", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.00311054540614289, "closeness_cetrality": 0.5294117647058824, "degree_cetrality": 0.12962962962962962, "font": {"color": "white"}, "group": 3, "id": "Hogsmeade", "label": "Hogsmeade", "shape": "dot", "size": 7}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 0, "id": "Jack", "label": "Jack", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 0, "id": "Captain", "label": "Captain", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 1, "id": "Ernie", "label": "Ernie", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.00023293733985557883, "closeness_cetrality": 0.5, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 1, "id": "Two", "label": "Two", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Felix", "label": "Felix", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0008385744234800838, "closeness_cetrality": 0.5094339622641509, "degree_cetrality": 0.09259259259259259, "font": {"color": "white"}, "group": 1, "id": "Morfin", "label": "Morfin", "shape": "dot", "size": 5}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.5046728971962616, "degree_cetrality": 0.07407407407407407, "font": {"color": "white"}, "group": 1, "id": "Merope", "label": "Merope", "shape": "dot", "size": 4}, {"betweenness_cetrality": 0.0005715284017170809, "closeness_cetrality": 0.5242718446601942, "degree_cetrality": 0.1111111111111111, "font": {"color": "white"}, "group": 3, "id": "Katie", "label": "Katie", "shape": "dot", "size": 6}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4954128440366973, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 3, "id": "Phineas", "label": "Phineas", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Loony", "label": "Loony", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.5, "degree_cetrality": 0.05555555555555555, "font": {"color": "white"}, "group": 2, "id": "Celestina", "label": "Celestina", "shape": "dot", "size": 3}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Violet", "label": "Violet", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Octavius", "label": "Octavius", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Gregory", "label": "Gregory", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.4909090909090909, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 0, "id": "Odo", "label": "Odo", "shape": "dot", "size": 1}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.3776223776223776, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 5, "id": "British", "label": "British", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.375, "degree_cetrality": 0.037037037037037035, "font": {"color": "white"}, "group": 5, "id": "Apothecary", "label": "Apothecary", "shape": "dot", "size": 2}, {"betweenness_cetrality": 0.0, "closeness_cetrality": 0.33962264150943394, "degree_cetrality": 0.018518518518518517, "font": {"color": "white"}, "group": 1, "id": "Dragon", "label": "Dragon", "shape": "dot", "size": 1}]);
+                  edges = new vis.DataSet([{"from": "Harry", "to": "Muggle", "value": 177, "width": 1}, {"from": "Harry", "to": "First", "value": 3, "width": 1}, {"from": "Harry", "to": "Bella", "value": 9, "width": 1}, {"from": "Harry", "to": "Narcissa", "value": 80, "width": 1}, {"from": "Harry", "to": "Severus", "value": 77, "width": 1}, {"from": "Harry", "to": "Bellatrix", "value": 64, "width": 1}, {"from": "Harry", "to": "Hogwarts", "value": 165, "width": 1}, {"from": "Harry", "to": "Lucius", "value": 30, "width": 1}, {"from": "Harry", "to": "Ministry", "value": 95, "width": 1}, {"from": "Harry", "to": "Albus", "value": 71, "width": 1}, {"from": "Harry", "to": "Neville", "value": 448, "width": 1}, {"from": "Harry", "to": "Hedwig", "value": 42, "width": 1}, {"from": "Harry", "to": "Petunia", "value": 14, "width": 1}, {"from": "Harry", "to": "Dudley", "value": 39, "width": 1}, {"from": "Harry", "to": "Kreacher", "value": 280, "width": 1}, {"from": "Harry", "to": "Hermione", "value": 1105, "width": 1}, {"from": "Harry", "to": "Dark", "value": 49, "width": 1}, {"from": "Harry", "to": "Horace", "value": 102, "width": 1}, {"from": "Harry", "to": "Second", "value": 6, "width": 1}, {"from": "Harry", "to": "Gryffindor", "value": 317, "width": 1}, {"from": "Harry", "to": "Quidditch", "value": 236, "width": 1}, {"from": "Harry", "to": "Ronald", "value": 17, "width": 1}, {"from": "Harry", "to": "Arthur", "value": 68, "width": 1}, {"from": "Harry", "to": "Molly", "value": 35, "width": 1}, {"from": "Harry", "to": "Nymphadora", "value": 22, "width": 1}, {"from": "Harry", "to": "George", "value": 123, "width": 1}, {"from": "Harry", "to": "Percy", "value": 78, "width": 1}, {"from": "Harry", "to": "Three", "value": 39, "width": 1}, {"from": "Harry", "to": "Charlie", "value": 13, "width": 1}, {"from": "Harry", "to": "Tom", "value": 236, "width": 1}, {"from": "Harry", "to": "Mother", "value": 13, "width": 1}, {"from": "Harry", "to": "Cormac", "value": 17, "width": 1}, {"from": "Harry", "to": "James", "value": 44, "width": 1}, {"from": "Harry", "to": "Vincent", "value": 10, "width": 1}, {"from": "Harry", "to": "Ravenclaw", "value": 41, "width": 1}, {"from": "Harry", "to": "Hogsmeade", "value": 128, "width": 1}, {"from": "Harry", "to": "Jack", "value": 6, "width": 1}, {"from": "Harry", "to": "Captain", "value": 20, "width": 1}, {"from": "Harry", "to": "Ernie", "value": 100, "width": 1}, {"from": "Harry", "to": "Two", "value": 46, "width": 1}, {"from": "Harry", "to": "Felix", "value": 19, "width": 1}, {"from": "Harry", "to": "Morfin", "value": 43, "width": 1}, {"from": "Harry", "to": "Merope", "value": 86, "width": 1}, {"from": "Harry", "to": "Katie", "value": 186, "width": 1}, {"from": "Harry", "to": "Phineas", "value": 5, "width": 1}, {"from": "Harry", "to": "Loony", "value": 16, "width": 1}, {"from": "Harry", "to": "Celestina", "value": 40, "width": 1}, {"from": "Harry", "to": "Violet", "value": 8, "width": 1}, {"from": "Harry", "to": "Octavius", "value": 4, "width": 1}, {"from": "Harry", "to": "Gregory", "value": 7, "width": 1}, {"from": "Harry", "to": "Odo", "value": 13, "width": 1}, {"from": "Muggle", "to": "Bella", "value": 4, "width": 1}, {"from": "Muggle", "to": "Albus", "value": 5, "width": 1}, {"from": "Muggle", "to": "Gryffindor", "value": 6, "width": 1}, {"from": "Muggle", "to": "Horace", "value": 5, "width": 1}, {"from": "Muggle", "to": "Arthur", "value": 5, "width": 1}, {"from": "Muggle", "to": "George", "value": 9, "width": 1}, {"from": "Muggle", "to": "Hedwig", "value": 1, "width": 1}, {"from": "Muggle", "to": "Hermione", "value": 12, "width": 1}, {"from": "Muggle", "to": "Merope", "value": 23, "width": 1}, {"from": "Muggle", "to": "Morfin", "value": 33, "width": 1}, {"from": "Muggle", "to": "Tom", "value": 26, "width": 1}, {"from": "Muggle", "to": "Ernie", "value": 4, "width": 1}, {"from": "Bella", "to": "Narcissa", "value": 29, "width": 1}, {"from": "Narcissa", "to": "Severus", "value": 22, "width": 1}, {"from": "Narcissa", "to": "Bellatrix", "value": 49, "width": 1}, {"from": "Narcissa", "to": "Lucius", "value": 22, "width": 1}, {"from": "Severus", "to": "Bellatrix", "value": 14, "width": 1}, {"from": "Severus", "to": "Lucius", "value": 3, "width": 1}, {"from": "Severus", "to": "Arthur", "value": 5, "width": 1}, {"from": "Severus", "to": "Celestina", "value": 4, "width": 1}, {"from": "Bellatrix", "to": "Albus", "value": 3, "width": 1}, {"from": "Bellatrix", "to": "Lucius", "value": 7, "width": 1}, {"from": "Bellatrix", "to": "Neville", "value": 11, "width": 1}, {"from": "Albus", "to": "Lucius", "value": 2, "width": 1}, {"from": "Albus", "to": "Ministry", "value": 4, "width": 1}, {"from": "Albus", "to": "Two", "value": 5, "width": 1}, {"from": "Albus", "to": "Horace", "value": 3, "width": 1}, {"from": "Albus", "to": "Three", "value": 5, "width": 1}, {"from": "Lucius", "to": "Hogwarts", "value": 5, "width": 1}, {"from": "Lucius", "to": "Arthur", "value": 10, "width": 1}, {"from": "Hogwarts", "to": "Kreacher", "value": 11, "width": 1}, {"from": "Hogwarts", "to": "Quidditch", "value": 5, "width": 1}, {"from": "Hogwarts", "to": "Katie", "value": 8, "width": 1}, {"from": "Hogwarts", "to": "Hogsmeade", "value": 4, "width": 1}, {"from": "Hogwarts", "to": "Phineas", "value": 5, "width": 1}, {"from": "Hogwarts", "to": "Tom", "value": 10, "width": 1}, {"from": "Hogwarts", "to": "Three", "value": 3, "width": 1}, {"from": "Hogwarts", "to": "Gryffindor", "value": 4, "width": 1}, {"from": "Ministry", "to": "Neville", "value": 4, "width": 1}, {"from": "Ministry", "to": "Molly", "value": 5, "width": 1}, {"from": "Ministry", "to": "George", "value": 2, "width": 1}, {"from": "Ministry", "to": "Hermione", "value": 6, "width": 1}, {"from": "Ministry", "to": "Morfin", "value": 11, "width": 1}, {"from": "Ministry", "to": "Percy", "value": 5, "width": 1}, {"from": "Neville", "to": "Quidditch", "value": 6, "width": 1}, {"from": "Neville", "to": "Gryffindor", "value": 12, "width": 1}, {"from": "Neville", "to": "Hermione", "value": 12, "width": 1}, {"from": "Neville", "to": "British", "value": 3, "width": 1}, {"from": "Hedwig", "to": "Apothecary", "value": 5, "width": 1}, {"from": "Hedwig", "to": "Hermione", "value": 6, "width": 1}, {"from": "Petunia", "to": "Dudley", "value": 11, "width": 1}, {"from": "Dudley", "to": "Kreacher", "value": 5, "width": 1}, {"from": "Kreacher", "to": "Hermione", "value": 11, "width": 1}, {"from": "Hermione", "to": "Apothecary", "value": 3, "width": 1}, {"from": "Hermione", "to": "George", "value": 11, "width": 1}, {"from": "Hermione", "to": "Quidditch", "value": 4, "width": 1}, {"from": "Hermione", "to": "Ernie", "value": 21, "width": 1}, {"from": "Hermione", "to": "Ravenclaw", "value": 3, "width": 1}, {"from": "Hermione", "to": "Katie", "value": 34, "width": 1}, {"from": "Hermione", "to": "Hogsmeade", "value": 11, "width": 1}, {"from": "Hermione", "to": "Gryffindor", "value": 6, "width": 1}, {"from": "Hermione", "to": "Cormac", "value": 5, "width": 1}, {"from": "Hermione", "to": "Three", "value": 10, "width": 1}, {"from": "Hermione", "to": "British", "value": 5, "width": 1}, {"from": "Dark", "to": "Hogsmeade", "value": 7, "width": 1}, {"from": "Horace", "to": "Dragon", "value": 6, "width": 1}, {"from": "Two", "to": "Tom", "value": 4, "width": 1}, {"from": "Gryffindor", "to": "Ravenclaw", "value": 36, "width": 1}, {"from": "Gryffindor", "to": "Quidditch", "value": 6, "width": 1}, {"from": "Gryffindor", "to": "Ronald", "value": 5, "width": 1}, {"from": "Quidditch", "to": "Arthur", "value": 5, "width": 1}, {"from": "Quidditch", "to": "Katie", "value": 10, "width": 1}, {"from": "Quidditch", "to": "George", "value": 6, "width": 1}, {"from": "Ronald", "to": "George", "value": 9, "width": 1}, {"from": "Arthur", "to": "Molly", "value": 20, "width": 1}, {"from": "Arthur", "to": "Celestina", "value": 3, "width": 1}, {"from": "Arthur", "to": "James", "value": 5, "width": 1}, {"from": "Arthur", "to": "Percy", "value": 7, "width": 1}, {"from": "Molly", "to": "George", "value": 1, "width": 1}, {"from": "Molly", "to": "Percy", "value": 5, "width": 1}, {"from": "George", "to": "Charlie", "value": 10, "width": 1}, {"from": "George", "to": "Percy", "value": 5, "width": 1}, {"from": "George", "to": "Hogsmeade", "value": 9, "width": 1}, {"from": "Three", "to": "Katie", "value": 16, "width": 1}, {"from": "Three", "to": "Hogsmeade", "value": 4, "width": 1}, {"from": "Tom", "to": "Merope", "value": 21, "width": 1}, {"from": "Tom", "to": "Morfin", "value": 1, "width": 1}, {"from": "Hogsmeade", "to": "Katie", "value": 5, "width": 1}, {"from": "Jack", "to": "Captain", "value": 4, "width": 1}, {"from": "Morfin", "to": "Merope", "value": 14, "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
