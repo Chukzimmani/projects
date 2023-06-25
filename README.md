@@ -11,7 +11,6 @@ This project aims to create a network of Harry Potter characters and derive insi
 - [Dependencies](#dependencies)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
@@ -19,7 +18,7 @@ In this project, we analyze the relationships between Harry Potter characters to
 
 ## Data Scraping and Wrangling
 
-To build the character network, we start by scraping the character names from a Harry Potter wiki website. Using the `beautifulsoup` library, we extract the relevant information and create a dataframe. The scraped data is then cleaned and preprocessed to ensure it is suitable for analysis.
+To build the character network, we start by scraping the character names from a Harry Potter wiki website. Using the `selenium` library, we extract the relevant information and create a dataframe. The scraped data is then cleaned and preprocessed to ensure it is suitable for analysis.
 
 ## Natural Language Processing
 
@@ -33,7 +32,7 @@ To visualize the character network, we employ the `pyvis` and `networkx` librari
 
 The following libraries were used in this project:
 
-- `beautifulsoup`: For web scraping character names.
+- `selenium`: For web scraping character names.
 - `pandas`: For data manipulation and cleaning.
 - `spacy`: For natural language processing and extracting relationships.
 - `matplotlib`: For generating visualizations.
