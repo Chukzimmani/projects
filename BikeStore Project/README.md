@@ -8,7 +8,6 @@
 - [Database Schema](#database-schema)
 - [Data Extraction and Transformation](#data-extraction-and-transformation)
 - [Dashboard Creation](#dashboard-creation)
-- [Project Structure](#project-structure)
 
 
 ## Project Overview
@@ -41,4 +40,4 @@ To extract and transform data for analysis, various SQL queries were used. Sampl
 - Identified top-selling products.
 
 ## Dashboard Creation
-Interactive dashboards were created using Excel and Tableau to visualize and present the analysis results. You can find the Tableau dashboard here <href = "https://public.tableau.com/app/profile/chukwudi.ekweani8026/viz/ExecutiveDashbaordforBikeStore/Dashboard1?publish=yes">.
+Interactive dashboards were created using Excel and Tableau to visualize and present the analysis results. You can find the Tableau dashboard  <a href = "https://public.tableau.com/app/profile/chukwudi.ekweani8026/viz/ExecutiveDashbaordforBikeStore/Dashboard1?publish=yes"> here </a>.
