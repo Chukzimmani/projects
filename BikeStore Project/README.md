@@ -26,11 +26,10 @@ This project involves the analysis of data from a bike store using Microsoft SQL
 - **Dashboard Creation**: Created interactive dashboards in Excel and Tableau to visualize key performance metrics, sales trends, and customer insights.
 
 ## Database Schema
-Below is a simplified representation of the database schema used in this project:
+Below is a representation of the database schema used in this project:
 
-![Database Schema](database_schema.png) <!-- Add an image of your database schema -->
+Schema.png <!-- <img width="1057" alt="Shema" src="https://github.com/Chukzimmani/projects/assets/134278987/7e838efd-2bda-4bce-8eda-348d8e44eb64">
 
-For the complete schema, please refer to the [SQL schema file](schema.sql) in the repository.
 
 ## Data Extraction and Transformation
 To extract and transform data for analysis, various SQL queries were used. Sample queries include:
