@@ -34,6 +34,15 @@ Below is a representation of the database schema used in this project:
 
 
 
+
+
+
+
+
+
+
+
+
 ## Data Extraction and Transformation
 To extract and transform data for analysis, various SQL queries were used. Sample queries include:
 
