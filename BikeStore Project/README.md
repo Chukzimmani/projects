@@ -28,7 +28,8 @@ This project involves the analysis of data from a bike store using Microsoft SQL
 ## Database Schema
 Below is a representation of the database schema used in this project:
 
-Schema.png <!-- <img width="1057" alt="Shema" src="https://github.com/Chukzimmani/projects/assets/134278987/7e838efd-2bda-4bce-8eda-348d8e44eb64">
+<img width="1057" alt="Shema" src="https://github.com/Chukzimmani/projects/assets/134278987/84f1e650-46ab-4304-85de-6724042884e5">
+
 
 
 ## Data Extraction and Transformation
