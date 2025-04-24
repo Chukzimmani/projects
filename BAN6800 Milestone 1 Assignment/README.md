@@ -46,9 +46,8 @@ Key Insights:
 
 ## ✅ Deliverables
 
-- `cleaned_smart_logistics_dataset.csv` — Cleaned and processed dataset
+- `smart_logistics_dataset_cleaned.csv` — Cleaned and processed dataset
 - `01_demand_forecasting_data_prep_and_eda.ipynb` — Jupyter notebook with all steps and EDA
-- PowerPoint slides summarizing the project (optional)
 
 ## 🚀 Next Steps
 
