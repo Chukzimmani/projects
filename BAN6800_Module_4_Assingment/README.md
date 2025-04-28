@@ -16,7 +16,6 @@ This project involves developing a business analytics model to forecast demand u
 │   ├── BAN6800Module_4_Cleaning_EDA.ipynb    # Data Cleaning and Exploratory Data Analysis
 │   └── Module4_Model.ipynb                   # Model Development and Evaluation
 |
-├── images/ (optional)                       # Graphs or feature importance charts (if saved)
 |
 └── README.md                                 # Project Overview
 ```
